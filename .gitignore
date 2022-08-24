@@ -52,5 +52,9 @@ Mkfile.old
 dkms.conf
 
 # Folders
+/bin
+/obj
+/.vs/ProyectoFinal2
 bin
 obj
+.vs
