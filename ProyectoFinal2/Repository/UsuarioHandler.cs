@@ -186,9 +186,9 @@ namespace ProyectoFinal2.Repository
                             usuario.Id = Convert.ToInt32(row["Id"]);
                             usuario.Nombre = row["Nombre"].ToString();
                             usuario.Apellido = row["Apellido"].ToString();
-                            usuario.Mail = row["Mail"].ToString();
                             usuario.NombreUsuario = user;
                             usuario.Contraseña = psw;
+                            usuario.Mail = row["Mail"].ToString();
                         }
                     }
                     else
@@ -211,7 +211,6 @@ namespace ProyectoFinal2.Repository
                 {
                     string querySelect = "SELECT * FROM Usuario WHERE NombreUsuario = @nombreUsuario";
 
-                    //Parámetros
                     SqlParameter nombreUsuarioParameter = new SqlParameter("nombreUsuario", System.Data.SqlDbType.VarChar) { Value = usuario.NombreUsuario };
 
                     sqlConnection.Open();
@@ -245,7 +244,6 @@ namespace ProyectoFinal2.Repository
                 {
                     string QueryUpdate = "INSERT INTO Usuario (Nombre, Apellido, NombreUsuario, Contraseña, Mail) VALUES (@Nombre, @Apellido, @NombreUsuario, @Contraseña, @Mail )";
 
-                    //Parámetros
                     SqlParameter param_Nombre = new SqlParameter("Nombre", SqlDbType.VarChar) { Value = usuario.Nombre };
                     SqlParameter param_Apellido = new SqlParameter("Apellido", SqlDbType.VarChar) { Value = usuario.Apellido };
                     SqlParameter param_NombreUsuario = new SqlParameter("NombreUsuario", SqlDbType.VarChar) { Value = usuario.NombreUsuario };

@@ -9,6 +9,7 @@ namespace ProyectoFinal2.Controllers
     [Route("[Controller]")]
     public class ProductoController : ControllerBase
     {
+        [HttpGet(Name = "Traer Productos")]
         public List<Producto> TraerProductos()
         {
             return ProductoHandler.TraerProductos();

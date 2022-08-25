@@ -16,7 +16,7 @@ namespace ProyectoFinal2.Controllers
         }
 
         [HttpGet(Name = "Inicio Sesión")]
-        public Usuario InicioSesion([FromHeader] string user, string psw)
+        public Usuario ValidarUsuaruio([FromHeader] string user, string psw)
         {
             return UsuarioHandler.ValidarUsuario(user, psw);
         }
