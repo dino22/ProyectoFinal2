@@ -14,13 +14,7 @@ namespace ProyectoFinal2.Controllers
         {
             return UsuarioHandler.TraerUsuarios(NombreUsuario);
         }
-
-        [HttpGet(Name = "Inicio Sesión")]
-        public Usuario ValidarUsuaruio([FromHeader] string user, string psw)
-        {
-            return UsuarioHandler.ValidarUsuario(user, psw);
-        }
-
+                
         [HttpPost(Name = "Post Usuario")]
         public string AgregarUsuario([FromBody] PostUsuario usu)
         {
