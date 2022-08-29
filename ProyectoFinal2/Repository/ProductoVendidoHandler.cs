@@ -1,6 +1,7 @@
 ﻿using ProyectoFinal2.Model;
 using System.Data.SqlClient;
 using System.Data;
+using ProyectoFinal2.Controllers.DTO;
 
 namespace ProyectoFinal2.Repository
 {
@@ -8,10 +9,10 @@ namespace ProyectoFinal2.Repository
     {
         public const string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=SistemaGestion;Trusted_Connection=True;";
 
-        public static List<ProductoVendido> TraerProductosVendidos(int idUsuario)
+        public static List<GetProductoVendido> TraerProductosVendidos(int idUsuario)
         {
 
-            List<ProductoVendido> productos = new List<ProductoVendido>();
+            List<GetProductoVendido> productos = new List<GetProductoVendido>();
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
@@ -28,14 +29,14 @@ namespace ProyectoFinal2.Repository
 
                     foreach (DataRow row in table.Rows)
                     {
-                        ProductoVendido productoVendido = new ProductoVendido();
-                        productoVendido.IdProducto = Convert.ToInt32(row["IdProducto"]);
-                        productoVendido.Stock = Convert.ToInt32(row["Stock"]);
-
-                        Producto producto = new Producto();
+                        Controllers.DTO.GetProductoVendido producto = new Controllers.DTO.GetProductoVendido();
+                        producto.IdProducto = Convert.ToInt32(row["IdProducto"]);
+                        producto.Stock = Convert.ToInt32(row["Stock"]);
                         producto.IdUsuario = Convert.ToInt32(row["IdUsuario"]);
                         producto.Descripciones = row["Descripciones"].ToString();
                         producto.PrecioVenta = Convert.ToDouble(row["PrecioVenta"]);
+
+                        productos.Add(producto);
                     }
                     sqlConnection.Close();
                 }

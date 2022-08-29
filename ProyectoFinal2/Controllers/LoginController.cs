@@ -5,11 +5,11 @@ using ProyectoFinal2.Repository;
 namespace ProyectoFinal2.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("api/[Controller]")]
     public class LoginController
     {
-        [HttpGet(Name = "Inicio Sesión")]
-        public Usuario ValidarUsuaruio([FromHeader] string user, string psw)
+        [HttpGet("{user}/{psw}")]
+        public Usuario ValidarUsuaruio(string user, string psw)
         {
             return UsuarioHandler.ValidarUsuario(user, psw);
         }

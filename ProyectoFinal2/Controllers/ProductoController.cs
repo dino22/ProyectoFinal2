@@ -6,7 +6,7 @@ using ProyectoFinal2.Repository;
 namespace ProyectoFinal2.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("api/[Controller]")]
     public class ProductoController : ControllerBase
     {
         [HttpGet(Name = "Traer Productos")]

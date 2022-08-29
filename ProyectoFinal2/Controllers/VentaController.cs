@@ -6,13 +6,13 @@ using ProyectoFinal2.Repository;
 namespace ProyectoFinal2.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("api/[Controller]")]
     public class VentaController : ControllerBase
     {
         [HttpGet(Name = "GetVenta")]
-        public List<Venta> TraerVentas([FromHeader] int IDUsuario)
+        public List<Controllers.DTO.GetVenta> TraerVentas([FromHeader] int idUsuario)
         {
-            return VentaHandler.TraerVentas(IDUsuario);
+            return VentaHandler.TraerVentas(idUsuario);
         }
 
         [HttpPost(Name = "PostVenta")]

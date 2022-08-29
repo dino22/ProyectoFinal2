@@ -6,13 +6,13 @@ using ProyectoFinal2.Repository;
 namespace ProyectoFinal2.Controllers
 {
     [ApiController]
-    [Route("[Controller]")]
+    [Route("api/[Controller]")]
     public class UsuarioController : ControllerBase
     {
         [HttpGet(Name = "Traer Usuarios")]
-        public List<Usuario> TraerUsuarios([FromHeader] string NombreUsuario)
+        public List<Usuario> TraerUsuarios([FromHeader] string nombreUsuario)
         {
-            return UsuarioHandler.TraerUsuarios(NombreUsuario);
+            return UsuarioHandler.TraerUsuarios(nombreUsuario);
         }
                 
         [HttpPost(Name = "Post Usuario")]

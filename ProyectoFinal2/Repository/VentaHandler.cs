@@ -8,30 +8,41 @@ namespace ProyectoFinal2.Repository
     public static class VentaHandler
     {
         public const string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=SistemaGestion;Trusted_Connection=True;";
-        public static List<Venta> TraerVentas(int IdUsuario)
+        public static List<Controllers.DTO.GetVenta> TraerVentas(int IdUsuario)
         {
-            List<Venta> Ventas = new List<Venta>();
+            List<Controllers.DTO.GetVenta> Ventas = new List<Controllers.DTO.GetVenta>();
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT P.IdUsuario, PV.IdProducto, P.Descripciones, PV.Stock, P.PrecioVenta FROM ProductoVendido PV INNER JOIN Producto P ON PV.IdProducto = P.Id WHERE P.IdUsuario = @IdUsuario", sqlConnection))
+                string querySelect = "SELECT U.NombreUsuario, PV.Stock, P.Descripciones, P.Costo, P.PrecioVenta, V.Comentarios FROM ProductoVendido PV INNER JOIN Producto P ON P.Id = PV.IdProducto INNER JOIN Usuario U ON U.Id = P.IdUsuario INNER JOIN Venta V ON V.Id = PV.IdVenta WHERE U.Id = @idUsuario";
+
+                SqlParameter idUsuarioParameter = new SqlParameter("IdUsuario", System.Data.SqlDbType.BigInt) { Value = IdUsuario };
+
+                sqlConnection.Open();
+
+                using (SqlCommand sqlCommand = new SqlCommand(querySelect, sqlConnection))
                 {
-                    sqlConnection.Open();
+                    sqlCommand.Parameters.Add(idUsuarioParameter);
 
-                    sqlCommand.Parameters.AddWithValue("@IdUsuario", IdUsuario);
-                    SqlDataAdapter sqlAdapter = new SqlDataAdapter();
-                    sqlAdapter.SelectCommand = sqlCommand;
-        
-                    DataTable table = new DataTable();
-                    sqlAdapter.Fill(table);
-
-                    foreach (DataRow row in table.Rows)
+                    using (SqlDataReader dataReader = sqlCommand.ExecuteReader())
                     {
-                        Venta venta = new Venta();
-                        venta.Id = Convert.ToInt32(row["Id"]);
-                        venta.Comentarios = row["Comentarios"].ToString();
-                        Ventas.Add(venta);
+                        if (dataReader.HasRows)
+                        {
+                            while (dataReader.Read())
+                            {
+                                Controllers.DTO.GetVenta venta = new Controllers.DTO.GetVenta();
+                                venta.Comentarios = dataReader["Comentarios"].ToString();
+                                venta.Descripciones = dataReader["Descripciones"].ToString();
+                                venta.Costo = Convert.ToDouble(dataReader["Costo"]);
+                                venta.PrecioVenta = Convert.ToDouble(dataReader["PrecioVenta"]);
+                                venta.NombreUsuario = dataReader["NombreUsuario"].ToString();
+                                venta.Stock = Convert.ToInt32(dataReader["Stock"]);
+
+                                Ventas.Add(venta);
+                            }
+                        }
                     }
+
                     sqlConnection.Close();
                 }
             }

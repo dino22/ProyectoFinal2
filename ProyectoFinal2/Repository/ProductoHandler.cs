@@ -22,7 +22,7 @@ namespace ProyectoFinal2.Repository
 
                     SqlDataAdapter sqlAdapter = new SqlDataAdapter();
                     sqlAdapter.SelectCommand = sqlCommand;
-                    
+
                     DataTable table = new DataTable();
                     sqlAdapter.Fill(table);
 
@@ -125,9 +125,9 @@ namespace ProyectoFinal2.Repository
             {
                 using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
-                    SqlParameter idProductoParameter = new SqlParameter("idProducto", System.Data.SqlDbType.BigInt) { Value = idProducto };
-
                     string queryDeleteProductoVendido = "DELETE FROM ProductoVendido WHERE IdProducto = @idProducto";
+
+                    SqlParameter idProductoParameter = new SqlParameter("idProducto", System.Data.SqlDbType.BigInt) { Value = idProducto };
 
                     sqlConnection.Open();
                     using (SqlCommand sqlCommand = new SqlCommand(queryDeleteProductoVendido, sqlConnection))
@@ -135,24 +135,22 @@ namespace ProyectoFinal2.Repository
                         sqlCommand.Parameters.Add(idProductoParameter);
                         filasAfectadas = sqlCommand.ExecuteNonQuery();
                         sqlCommand.Parameters.Clear();
-                    }
-                    sqlConnection.Close();
 
-                    string queryDeleteProducto = "DELETE FROM Producto WHERE Id = @idProducto";
+                        if (filasAfectadas > 0)
+                        {
+                            string queryDeleteProducto = "DELETE FROM Producto WHERE Id = @idProducto";
 
-                    sqlConnection.Open();
-                    using (SqlCommand sqlCommand = new SqlCommand(queryDeleteProducto, sqlConnection))
-                    {
-                        sqlCommand.Parameters.Add(idProductoParameter);
-                        filasAfectadas = sqlCommand.ExecuteNonQuery();
-                    }
-                    if (filasAfectadas == 1)
-                    {
-                        resultado = "El producto: " + idProducto + " ha sido eliminado.";
-                    }
-                    else
-                    {
-                        resultado = "El producto: " + idProducto + " no ha sido eliminado.";
+                            using (SqlCommand sqlCommand1 = new SqlCommand(queryDeleteProducto, sqlConnection))
+                            {
+                                sqlCommand1.Parameters.Add(idProductoParameter);
+                                sqlCommand1.ExecuteNonQuery();
+                            }
+                            resultado = "El producto: " + idProducto + " ha sido eliminado.";
+                        }
+                        else
+                        {
+                            resultado = "El producto: " + idProducto + " no ha sido eliminado.";
+                        }
                     }
                     sqlConnection.Close();
                 }
@@ -172,7 +170,7 @@ namespace ProyectoFinal2.Repository
             {
                 SqlDataAdapter SqlAdapter = new SqlDataAdapter("SELECT Id FROM Usuario", sqlConnection);
                 sqlConnection.Open();
-                
+
                 SqlAdapter.Fill(dtId);
                 sqlConnection.Close();
             }
