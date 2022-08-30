@@ -8,7 +8,7 @@ namespace ProyectoFinal2.Repository
     public static class ProductoVendidoHandler
     {
         public const string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=SistemaGestion;Trusted_Connection=True;";
-
+        //Método para traer una lista de ProductosVendidos por id de Usuario
         public static List<GetProductoVendido> TraerProductosVendidos(int idUsuario)
         {
 

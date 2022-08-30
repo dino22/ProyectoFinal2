@@ -7,6 +7,7 @@ namespace ProyectoFinal2.Repository
     public static class UsuarioHandler
     {
         public const string connectionString = "Server=localhost\\SQLEXPRESS;Database=SistemaGestion;Trusted_Connection=True;";
+        //Método para traer una lista de Usuarios por NombreUsuario, si éste existe
         public static List<Usuario> TraerUsuarios(string NombreUsuario)
         {   
             Usuario usuarioObj = new Usuario();
@@ -59,7 +60,7 @@ namespace ProyectoFinal2.Repository
             }
             return usuarios;
         }
-
+        //Método para agregar registro de Usuario
         public static string AgregarUsuario(Usuario usuario)
         {
             string resultado = String.Empty;
@@ -87,7 +88,7 @@ namespace ProyectoFinal2.Repository
             }
             return resultado;
         }
-
+        //Método para modificar un registro de Usuario
         public static string ModificarUsuario(Usuario usuario)
         {
             string respuesta = String.Empty;
@@ -100,7 +101,7 @@ namespace ProyectoFinal2.Repository
             }
             return respuesta;
         }
-
+        //Método para eliminar un registro de Usuario, eliminando también ProductoVendido y Producto
         public static string QuitarUsuario(int idUsuario)
         {
             string resultado = String.Empty;
@@ -160,7 +161,7 @@ namespace ProyectoFinal2.Repository
             }
             return resultado;
         }
-
+        //Método para validar login de un Usuario
         public static Usuario ValidarUsuario(string user, string psw)
         {
             Usuario usuario = new Usuario();
@@ -201,7 +202,7 @@ namespace ProyectoFinal2.Repository
             }
             return usuario;
         }
-
+        //Método para validar si existe un registro de Usuario
         private static bool ValidarNombreUsuarioExistente(Usuario usuario)
         {
             bool idExistente = false;
@@ -232,7 +233,7 @@ namespace ProyectoFinal2.Repository
             }
             return idExistente;
         }
-
+        //Método para agregar Usuarios a una tabla para validaciones
         private static string AgregarUsuarioTable(Usuario usuario)
         {
             string resultado = String.Empty;
@@ -277,7 +278,7 @@ namespace ProyectoFinal2.Repository
             }
             return resultado;
         }
-
+        //Método para validar NombreUsuario existente
         private static string ValidarUsuarioId(Usuario usuario)
         {
             string resultado = String.Empty;
@@ -287,7 +288,6 @@ namespace ProyectoFinal2.Repository
                 {
                     string querySelect = "SELECT * FROM Usuario WHERE NombreUsuario = @NombreUsuario AND Id != @IdUsuario";
 
-                    //Parámetros
                     SqlParameter parametroUsuarioId = new SqlParameter("IdUsuario", System.Data.SqlDbType.BigInt) { Value = usuario.Id };
                     SqlParameter param_NombreUsuario = new SqlParameter("NombreUsuario", System.Data.SqlDbType.VarChar) { Value = usuario.NombreUsuario };
 
@@ -311,7 +311,7 @@ namespace ProyectoFinal2.Repository
             }
             return resultado;
         }
-
+        //Método para modificar un registro de Usuario
         private static string ActualizarUsuario(Usuario usuario)
         {
             string resultado = String.Empty;
@@ -323,7 +323,6 @@ namespace ProyectoFinal2.Repository
                 {
                     string queryUpdate = "UPDATE Usuario SET Nombre = @Nombre, Apellido = @Apellido, NombreUsuario = @NombreUsuario, Contraseña = @Contraseña, Mail = @Mail WHERE Id = @IdUsuario";
 
-                    //Parámetros
                     SqlParameter idUsuarioParameter = new SqlParameter("IdUsuario", System.Data.SqlDbType.Int) { Value = usuario.Id };
                     SqlParameter nombreParameter = new SqlParameter("Nombre", System.Data.SqlDbType.VarChar) { Value = usuario.Nombre };
                     SqlParameter apellidoParameter = new SqlParameter("Apellido", System.Data.SqlDbType.VarChar) { Value = usuario.Apellido };

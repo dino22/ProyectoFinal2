@@ -8,7 +8,7 @@ namespace ProyectoFinal2.Repository
     public static class ProductoHandler
     {
         public const string connectionString = "Server=localhost\\SQLEXPRESS;Database=SistemaGestion;Trusted_Connection=True;";
-
+        //Método para traer una lista de Productos
         public static List<Producto> TraerProductos()
         {
 
@@ -42,8 +42,8 @@ namespace ProyectoFinal2.Repository
             }
             return productos;
         }
-
-        public static List<PostProducto> AgregarProducto(List<PostProducto> DetalleProducto)
+        //Método para agregar un nuevo Producto
+        public static List<PostProducto> AgregarProducto(List<PostProducto> Producto)
         {
             DataTable dtUsuarios = new DataTable();
             DataRow[] querySelect;
@@ -52,7 +52,7 @@ namespace ProyectoFinal2.Repository
 
             dtUsuarios = TraerIdUsuarios();
 
-            foreach (var row in DetalleProducto)
+            foreach (var row in Producto)
             {
                 cont++;
 
@@ -61,14 +61,14 @@ namespace ProyectoFinal2.Repository
 
                 if (querySelect.Length == 0)
                 {
-                    DetalleProducto[cont].Status = "El producto: " + row.Descripciones + " no se ha registrado. No existe el Id de Usuario";
+                    Producto[cont].Status = "El producto: " + row.Descripciones + " no se ha registrado. No existe el Id de Usuario";
                 }
 
-                DetalleProducto[cont].Status = AgregarProductoTable(row);
+                Producto[cont].Status = AgregarProductoTable(row);
             }
-            return DetalleProducto;
+            return Producto;
         }
-
+        //Método para modificar un registro de Producto
         public static string ModificarProducto(Producto producto)
         {
             string resultado = String.Empty;
@@ -79,7 +79,6 @@ namespace ProyectoFinal2.Repository
                 {
                     string queryUpdate = "UPDATE Producto SET Descripciones = @Descripciones, Costo = @Costo, PrecioVenta = @PrecioVenta, Stock = @Stock, IdUsuario = @IdUsuario WHERE Id = @IdProducto";
 
-                    //Parámetros
                     SqlParameter idProductoParameter = new SqlParameter("IdProducto", System.Data.SqlDbType.BigInt) { Value = producto.Id };
                     SqlParameter descripcionesParameter = new SqlParameter("Descripciones", SqlDbType.VarChar) { Value = producto.Descripciones };
                     SqlParameter costoParameter = new SqlParameter("Costo", System.Data.SqlDbType.Money) { Value = producto.Costo };
@@ -115,7 +114,7 @@ namespace ProyectoFinal2.Repository
             }
             return resultado;
         }
-
+        //Método para eliminar un registro de Producto
         public static string EliminarProducto(int idProducto)
         {
             string resultado = String.Empty;
@@ -161,7 +160,7 @@ namespace ProyectoFinal2.Repository
             }
             return resultado;
         }
-
+        //Método para traer los id de Usuarios
         private static DataTable TraerIdUsuarios()
         {
             DataTable dtId = new DataTable();
@@ -176,7 +175,7 @@ namespace ProyectoFinal2.Repository
             }
             return dtId;
         }
-
+        //Método para agregar Productos a una tabla
         private static string AgregarProductoTable(PostProducto producto)
         {
             string Status = string.Empty;
