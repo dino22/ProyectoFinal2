@@ -73,13 +73,13 @@ namespace ProyectoFinal2.Repository
 
                 if (querySelect.Length == 0)
                 {
-                    Venta[cont].Status = "Venta no Registrada - No existe el producto.";
+                    Venta[cont].Estado = "Venta no Registrada - No existe el producto.";
                 }
                 else
                 {
                     if (row.Stock > Convert.ToInt32(querySelect[0].ItemArray[1]))
                     {
-                        Venta[cont].Status = "Venta no Registrada - No hay Stock de producto.";
+                        Venta[cont].Estado = "Venta no Registrada - No hay Stock de producto.";
                     }
                     else
                     {
@@ -92,37 +92,37 @@ namespace ProyectoFinal2.Repository
 
                 if (querySelect.Length == 0)
                 {
-                    Venta[cont].Status = "Venta no Registrada - No existe el Usuario.";
+                    Venta[cont].Estado = "Venta no Registrada - No existe el Usuario.";
                 }
 
-                Venta[cont].Status = AgregarVenta(row.IdProducto, row.IdUsuario);
+                Venta[cont].Estado = AgregarVenta(row.IdProducto, row.IdUsuario);
 
-                if (Venta[cont].Status == "OK")
+                if (Venta[cont].Estado == "OK")
                 {
                     IdVenta = TraerIdVenta();
-                    Venta[cont].Status = "Venta Registrada - Id Venta: " + IdVenta + " - IdUsuario: " + row.IdUsuario;
+                    Venta[cont].Estado = "Venta Registrada - Id Venta: " + IdVenta + " - IdUsuario: " + row.IdUsuario;
                 }
                 else
                 {
                     continue;
                 }
 
-                Venta[cont].Status = InsertProductoVendido(row.IdProducto, row.Stock, IdVenta);
+                Venta[cont].Estado = InsertProductoVendido(row.IdProducto, row.Stock, IdVenta);
 
-                if (Venta[cont].Status == "OK")
+                if (Venta[cont].Estado == "OK")
                 {
-                    Venta[cont].Status = "Venta Registrada - Id Venta: " + IdVenta + " - IdUsuario: " + row.IdUsuario;
+                    Venta[cont].Estado = "Venta Registrada - Id Venta: " + IdVenta + " - IdUsuario: " + row.IdUsuario;
                 }
                 else
                 {
                     continue;
                 }
 
-                Venta[cont].Status = ModificarStockProducto(row.IdProducto, stock_producto, IdVenta, row.IdUsuario);
+                Venta[cont].Estado = ModificarStockProducto(row.IdProducto, stock_producto, IdVenta, row.IdUsuario);
 
-                if (Venta[cont].Status == "OK")
+                if (Venta[cont].Estado == "OK")
                 {
-                    Venta[cont].Status = "Venta Registrada y Stock Actualizado - Id Venta: " + IdVenta + " - IdUsuario: " + row.IdUsuario;
+                    Venta[cont].Estado = "Venta Registrada y Stock Actualizado - Id Venta: " + IdVenta + " - IdUsuario: " + row.IdUsuario;
                 }
                 else
                 {
@@ -187,7 +187,7 @@ namespace ProyectoFinal2.Repository
         //Método para agregar un registro de Venta por id de Producto e id de Usuario
         private static string AgregarVenta(int IdProd, int IdUsu)
         {
-            string Status = String.Empty;
+            string Estado = String.Empty;
             int filasAfectadas = 0;
             DataTable dtIdVenta = new DataTable();
 
@@ -210,20 +210,20 @@ namespace ProyectoFinal2.Repository
                     }
                     if (filasAfectadas == 1)
                     {
-                        Status = "OK";
+                        Estado = "OK";
                     }
                     else
                     {
-                        Status = "Venta No Registrada - Error al ingresar venta.";
+                        Estado = "Venta No Registrada - Error al ingresar venta.";
                     }
                     sqlConnection.Close();
                 }
             }
             catch (Exception ex)
             {
-                Status = "Venta No Registrada - Error al ingresar venta: " + ex.Message;
+                Estado = "Venta No Registrada - Error al ingresar venta: " + ex.Message;
             }
-            return Status;
+            return Estado;
         }
         //Método para traer id de última Venta
         private static int TraerIdVenta()

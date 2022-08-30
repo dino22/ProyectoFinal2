@@ -8,6 +8,7 @@ namespace ProyectoFinal2.Controllers
     [Route("api/[Controller]")]
     public class LoginController
     {
+        //Método API se pasa por parámetro el NombreUsuario y Contraseña
         [HttpGet("{user}/{psw}")]
         public Usuario ValidarUsuaruio(string user, string psw)
         {

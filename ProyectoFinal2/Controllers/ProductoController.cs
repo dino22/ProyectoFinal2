@@ -9,6 +9,7 @@ namespace ProyectoFinal2.Controllers
     [Route("api/[Controller]")]
     public class ProductoController : ControllerBase
     {
+        //Método API trae todos los Productos
         [HttpGet(Name = "Traer Productos")]
         public List<Producto> TraerProductos()
         {

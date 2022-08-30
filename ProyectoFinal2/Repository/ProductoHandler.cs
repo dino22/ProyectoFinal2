@@ -61,10 +61,10 @@ namespace ProyectoFinal2.Repository
 
                 if (querySelect.Length == 0)
                 {
-                    Producto[cont].Status = "El producto: " + row.Descripciones + " no se ha registrado. No existe el Id de Usuario";
+                    Producto[cont].Estado = "El producto: " + row.Descripciones + " no se ha registrado. No existe el Id de Usuario";
                 }
 
-                Producto[cont].Status = AgregarProductoTable(row);
+                Producto[cont].Estado = AgregarProductoTable(row);
             }
             return Producto;
         }
@@ -178,7 +178,7 @@ namespace ProyectoFinal2.Repository
         //Método para agregar Productos a una tabla
         private static string AgregarProductoTable(PostProducto producto)
         {
-            string Status = string.Empty;
+            string Estado = string.Empty;
             int filasAfectadas = 0;
 
             try
@@ -206,20 +206,20 @@ namespace ProyectoFinal2.Repository
                     }
                     if (filasAfectadas == 1)
                     {
-                        Status = "Producto: " + producto.Descripciones + " registrado correctamente.";
+                        Estado = "Producto: " + producto.Descripciones + " registrado correctamente.";
                     }
                     else
                     {
-                        Status = "Producto: " + producto.Descripciones + " no se ha registrado.";
+                        Estado = "Producto: " + producto.Descripciones + " no se ha registrado.";
                     }
                     sqlConnection.Close();
                 }
             }
             catch (Exception ex)
             {
-                Status = "Producto: " + producto.Descripciones + " no se ha registrado. - Error: " + ex.Message;
+                Estado = "Producto: " + producto.Descripciones + " no se ha registrado. - Error: " + ex.Message;
             }
-            return Status;
+            return Estado;
         }
     }
 }
