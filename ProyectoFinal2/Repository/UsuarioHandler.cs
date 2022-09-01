@@ -102,7 +102,7 @@ namespace ProyectoFinal2.Repository
             return respuesta;
         }
         //Método para eliminar un registro de Usuario, eliminando también ProductoVendido y Producto
-        public static string QuitarUsuario(int idUsuario)
+        public static string EliminarUsuario(int idUsuario)
         {
             string resultado = String.Empty;
             int filasAfectadas = 0;

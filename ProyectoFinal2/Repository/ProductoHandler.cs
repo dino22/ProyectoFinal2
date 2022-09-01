@@ -42,7 +42,7 @@ namespace ProyectoFinal2.Repository
             }
             return productos;
         }
-        //Método para agregar un nuevo Producto
+        //Método para agregar un nuevo Producto por Usuario si no existe
         public static List<PostProducto> AgregarProducto(List<PostProducto> Producto)
         {
             DataTable dtUsuarios = new DataTable();
@@ -175,7 +175,7 @@ namespace ProyectoFinal2.Repository
             }
             return dtId;
         }
-        //Método para agregar Productos a una tabla
+        //Método para agregar Productos
         private static string AgregarProductoTable(PostProducto producto)
         {
             string Estado = string.Empty;

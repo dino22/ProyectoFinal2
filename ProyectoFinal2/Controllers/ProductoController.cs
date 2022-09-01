@@ -15,13 +15,13 @@ namespace ProyectoFinal2.Controllers
         {
             return ProductoHandler.TraerProductos();
         }
-
+        //Método API para agregar Producto por idUsuario si no existe
         [HttpPost(Name = "Post Producto")]
         public List<PostProducto> AgregarProducto([FromBody] List<PostProducto> ListadoProductos)
         {
             return ProductoHandler.AgregarProducto(ListadoProductos);
         }
-
+        //Método API para modificar un Producto
         [HttpPut(Name = "Put Producto")]
         public string ModificarProducto([FromBody] PutProducto producto)
         {
@@ -35,7 +35,7 @@ namespace ProyectoFinal2.Controllers
                 IdUsuario = producto.IdUsuario
             });
         }
-
+        //Método API para eliminar un Producto
         [HttpDelete(Name = "Delete Producto")]
         public string EliminarProducto([FromHeader] int producto)
         {

@@ -9,12 +9,13 @@ namespace ProyectoFinal2.Controllers
     [Route("api/[Controller]")]
     public class UsuarioController : ControllerBase
     {
+        //Método API para traer Usuario por nombreUsuario si existe
         [HttpGet(Name = "Traer Usuarios")]
         public List<Usuario> TraerUsuarios([FromHeader] string nombreUsuario)
         {
             return UsuarioHandler.TraerUsuarios(nombreUsuario);
         }
-                
+        //Método API para agregar un Usuario
         [HttpPost(Name = "Post Usuario")]
         public string AgregarUsuario([FromBody] PostUsuario usu)
         {
@@ -27,7 +28,7 @@ namespace ProyectoFinal2.Controllers
                 Mail = usu.Mail
             });
         }
-
+        //Método API para modificar un Usuario
         [HttpPut(Name = "Put Usuario")]
         public string ModificarUsuario([FromBody] PutUsuario usu)
         {
@@ -41,11 +42,11 @@ namespace ProyectoFinal2.Controllers
                 Mail = usu.Mail
             });
         }
-
+        //Método API para eliminar un Usuario
         [HttpDelete(Name = "Delete Usuario")]
-        public string QuitarUsuario([FromHeader] int usu)
+        public string EliminarUsuario([FromHeader] int usu)
         {
-            return UsuarioHandler.QuitarUsuario(usu);
+            return UsuarioHandler.EliminarUsuario(usu);
         }
     }
 }

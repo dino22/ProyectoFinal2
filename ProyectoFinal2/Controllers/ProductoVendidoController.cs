@@ -9,6 +9,7 @@ namespace ProyectoFinal2.Controllers
     [Route("api/[Controller]")]
     public class ProductoVendidoController
     {
+        //Método API para traer ProductoVendido por idUsuario
         [HttpGet(Name = "Producto Vendido")]
         public List<GetProductoVendido> TraerProductoVendido([FromHeader] int idUsuario)
         {
