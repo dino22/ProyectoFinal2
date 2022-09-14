@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProyectoFinal2.Controllers.DTO;
+using ProyectoFinal2.DTO;
 using ProyectoFinal2.Model;
 using ProyectoFinal2.Repository;
 

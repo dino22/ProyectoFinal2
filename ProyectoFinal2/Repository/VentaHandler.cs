@@ -1,7 +1,7 @@
-﻿using ProyectoFinal2.Controllers.DTO;
-using ProyectoFinal2.Model;
+﻿using ProyectoFinal2.Model;
 using System.Data.SqlClient;
 using System.Data;
+using ProyectoFinal2.DTO;
 
 namespace ProyectoFinal2.Repository
 {
@@ -9,9 +9,9 @@ namespace ProyectoFinal2.Repository
     {
         public const string ConnectionString = "Server=localhost\\SQLEXPRESS;Database=SistemaGestion;Trusted_Connection=True;";
         ////Método para traer una lista de Ventas por un id de Usuario
-        public static List<Controllers.DTO.GetVenta> TraerVentas(int IdUsuario)
+        public static List<DTO.GetVenta> TraerVentas(int IdUsuario)
         {
-            List<Controllers.DTO.GetVenta> Ventas = new List<Controllers.DTO.GetVenta>();
+            List<DTO.GetVenta> Ventas = new List<DTO.GetVenta>();
 
             using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
@@ -31,7 +31,7 @@ namespace ProyectoFinal2.Repository
                         {
                             while (dataReader.Read())
                             {
-                                Controllers.DTO.GetVenta venta = new Controllers.DTO.GetVenta();
+                                DTO.GetVenta venta = new Controllers.DTO.GetVenta();
                                 venta.Comentarios = dataReader["Comentarios"].ToString();
                                 venta.Descripciones = dataReader["Descripciones"].ToString();
                                 venta.Costo = Convert.ToDouble(dataReader["Costo"]);

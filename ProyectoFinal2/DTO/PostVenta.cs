@@ -1,4 +1,4 @@
-﻿namespace ProyectoFinal2.Controllers.DTO
+﻿namespace ProyectoFinal2.DTO
 {
     public class PostVenta
     {

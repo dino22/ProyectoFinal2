@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProyectoFinal2.Controllers.DTO;
+using ProyectoFinal2.DTO;
 using ProyectoFinal2.Model;
 using ProyectoFinal2.Repository;
 
@@ -11,7 +11,7 @@ namespace ProyectoFinal2.Controllers
     {
         //Método HTTP para traer Ventas por idUsuario
         [HttpGet(Name = "GetVenta")]
-        public List<Controllers.DTO.GetVenta> TraerVentas([FromHeader] int idUsuario)
+        public List<DTO.GetVenta> TraerVentas([FromHeader] int idUsuario)
         {
             return VentaHandler.TraerVentas(idUsuario);
         }

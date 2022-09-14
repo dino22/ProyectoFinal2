@@ -1,7 +1,7 @@
 ﻿using ProyectoFinal2.Model;
 using System.Data.SqlClient;
 using System.Data;
-using ProyectoFinal2.Controllers.DTO;
+using ProyectoFinal2.DTO;
 
 namespace ProyectoFinal2.Repository
 {
@@ -29,7 +29,7 @@ namespace ProyectoFinal2.Repository
 
                     foreach (DataRow row in table.Rows)
                     {
-                        Controllers.DTO.GetProductoVendido producto = new Controllers.DTO.GetProductoVendido();
+                        GetProductoVendido producto = new Controllers.DTO.GetProductoVendido();
                         producto.IdProducto = Convert.ToInt32(row["IdProducto"]);
                         producto.Stock = Convert.ToInt32(row["Stock"]);
                         producto.IdUsuario = Convert.ToInt32(row["IdUsuario"]);

@@ -1,4 +1,4 @@
-﻿using ProyectoFinal2.Controllers.DTO;
+﻿using ProyectoFinal2.DTO;
 using ProyectoFinal2.Model;
 using System.Data;
 using System.Data.SqlClient;

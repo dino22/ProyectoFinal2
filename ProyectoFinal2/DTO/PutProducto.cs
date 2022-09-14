@@ -1,12 +1,12 @@
-﻿namespace ProyectoFinal2.Controllers.DTO
+﻿namespace ProyectoFinal2.DTO
 {
-    public class GetVenta
+    public class PutProducto
     {
-        public string Comentarios { get; set; }
+        public int Id { get; set; }
         public string Descripciones { get; set; }
         public double Costo { get; set; }
         public double PrecioVenta { get; set; }
-        public string NombreUsuario { get; set; }
         public int Stock { get; set; }
+        public int IdUsuario { get; set; }
     }
 }
