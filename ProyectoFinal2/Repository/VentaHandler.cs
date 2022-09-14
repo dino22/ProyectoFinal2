@@ -31,7 +31,7 @@ namespace ProyectoFinal2.Repository
                         {
                             while (dataReader.Read())
                             {
-                                DTO.GetVenta venta = new Controllers.DTO.GetVenta();
+                                DTO.GetVenta venta = new DTO.GetVenta();
                                 venta.Comentarios = dataReader["Comentarios"].ToString();
                                 venta.Descripciones = dataReader["Descripciones"].ToString();
                                 venta.Costo = Convert.ToDouble(dataReader["Costo"]);

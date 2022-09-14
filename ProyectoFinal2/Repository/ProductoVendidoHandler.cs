@@ -29,7 +29,7 @@ namespace ProyectoFinal2.Repository
 
                     foreach (DataRow row in table.Rows)
                     {
-                        GetProductoVendido producto = new Controllers.DTO.GetProductoVendido();
+                        GetProductoVendido producto = new DTO.GetProductoVendido();
                         producto.IdProducto = Convert.ToInt32(row["IdProducto"]);
                         producto.Stock = Convert.ToInt32(row["Stock"]);
                         producto.IdUsuario = Convert.ToInt32(row["IdUsuario"]);
