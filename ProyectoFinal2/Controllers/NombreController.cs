@@ -6,7 +6,7 @@ namespace ProyectoFinal2.Controllers
     [Route("[Controller]")]
     public class NombreController : ControllerBase
     {
-        //Método API que devuelve el nombre del Sistema
+        //Método HTTP que devuelve el nombre del Sistema
         [HttpGet]
         public string TraerNombre()
         {

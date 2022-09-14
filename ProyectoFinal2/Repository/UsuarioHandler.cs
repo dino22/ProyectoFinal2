@@ -162,18 +162,18 @@ namespace ProyectoFinal2.Repository
             return resultado;
         }
         //Método para validar login de un Usuario
-        public static Usuario ValidarUsuario(string user, string psw)
+        public static Usuario ValidarUsuario(string nombreUsuario, string contraseña)
         {
             Usuario usuario = new Usuario();
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Usuario WHERE NombreUsuario = @user AND Contraseña = @psw", sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand("SELECT * FROM Usuario WHERE NombreUsuario = @nombreUsuario AND Contraseña = @contraseña", sqlConnection))
                 {
                     sqlConnection.Open();
 
-                    sqlCommand.Parameters.AddWithValue("@user", user);
-                    sqlCommand.Parameters.AddWithValue("@psw", psw);
+                    sqlCommand.Parameters.AddWithValue("@nombreUsuario", nombreUsuario);
+                    sqlCommand.Parameters.AddWithValue("@contraseña", contraseña);
                     SqlDataAdapter sqlAdapter = new SqlDataAdapter();
                     sqlAdapter.SelectCommand = sqlCommand;
                     
@@ -187,8 +187,8 @@ namespace ProyectoFinal2.Repository
                             usuario.Id = Convert.ToInt32(row["Id"]);
                             usuario.Nombre = row["Nombre"].ToString();
                             usuario.Apellido = row["Apellido"].ToString();
-                            usuario.NombreUsuario = user;
-                            usuario.Contraseña = psw;
+                            usuario.NombreUsuario = nombreUsuario;
+                            usuario.Contraseña = contraseña;
                             usuario.Mail = row["Mail"].ToString();
                         }
                     }

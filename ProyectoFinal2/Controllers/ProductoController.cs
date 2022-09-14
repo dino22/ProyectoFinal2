@@ -9,19 +9,19 @@ namespace ProyectoFinal2.Controllers
     [Route("api/[Controller]")]
     public class ProductoController : ControllerBase
     {
-        //Método API trae todos los Productos
+        //Método HTTP trae todos los Productos
         [HttpGet(Name = "Traer Productos")]
         public List<Producto> TraerProductos()
         {
             return ProductoHandler.TraerProductos();
         }
-        //Método API para agregar Producto por idUsuario si no existe
+        //Método HTTP para agregar Producto por idUsuario si no existe
         [HttpPost(Name = "Post Producto")]
         public List<PostProducto> AgregarProducto([FromBody] List<PostProducto> ListadoProductos)
         {
             return ProductoHandler.AgregarProducto(ListadoProductos);
         }
-        //Método API para modificar un Producto
+        //Método HTTP para modificar un Producto
         [HttpPut(Name = "Put Producto")]
         public string ModificarProducto([FromBody] PutProducto producto)
         {
@@ -35,7 +35,7 @@ namespace ProyectoFinal2.Controllers
                 IdUsuario = producto.IdUsuario
             });
         }
-        //Método API para eliminar un Producto
+        //Método HTTP para eliminar un Producto
         [HttpDelete(Name = "Delete Producto")]
         public string EliminarProducto([FromHeader] int producto)
         {
